@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.booklore.config.AIProperties;
 import org.booklore.model.entity.BookMetadataEntity;
-import org.booklore.repository.book.BookMetadataRepository;
+import org.booklore.repository.BookMetadataRepository;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
