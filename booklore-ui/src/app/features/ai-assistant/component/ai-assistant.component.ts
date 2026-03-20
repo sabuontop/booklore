@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { AIAssistantService } from '../service/ai-assistant.service';
+import { AppSettingsService } from '../../../shared/service/app-settings.service';
+import { map } from 'rxjs/operators';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -19,6 +21,11 @@ interface Message {
 })
 export class AIAssistantComponent {
   private aiService = inject(AIAssistantService);
+  private appSettingsService = inject(AppSettingsService);
+  
+  isAvailable$ = this.appSettingsService.publicAppSettings$.pipe(
+    map(s => s?.aiEnabled ?? false)
+  );
   
   isOpen = false;
   userInput = '';

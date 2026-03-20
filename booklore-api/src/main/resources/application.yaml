@@ -23,11 +23,7 @@ app:
     base-url: ${TELEMETRY_BASE_URL:https://telemetry.booklore.org}
   disk-type: ${DISK_TYPE:LOCAL}
 
-  ai:
-    enabled: ${AI_ENABLED:false}
-    api-key: ${AI_API_KEY:}
-    base-url: ${AI_BASE_URL:https://api.groq.com/openai/v1/chat/completions}
-    model: ${AI_MODEL:llama-3.1-70b-versatile}
+  # Config for other things...
 
 server:
   max-http-header-size: 128KB

@@ -50,6 +50,9 @@
               <p-tab [value]="SettingsTab.AuditLogs">
                 <i class="pi pi-history"></i> {{ t('auditLogs') }}
               </p-tab>
+              <p-tab [value]="SettingsTab.AI">
+                <i class="pi pi-sparkles"></i> AI
+              </p-tab>
             }
             <p-tab [value]="SettingsTab.OpdsV2">
               <i class="pi pi-globe"></i> {{ t('opds') }}
@@ -125,6 +128,11 @@
               <p-tabpanel [value]="SettingsTab.AuditLogs">
                 <ng-template #content>
                   <app-audit-logs></app-audit-logs>
+                </ng-template>
+              </p-tabpanel>
+              <p-tabpanel [value]="SettingsTab.AI">
+                <ng-template #content>
+                  <app-ai-settings></app-ai-settings>
                 </ng-template>
               </p-tabpanel>
             }

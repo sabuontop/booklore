@@ -10,6 +10,7 @@ export interface PublicAppSettings {
   remoteAuthEnabled: boolean;
   oidcProviderDetails: OidcProviderDetails;
   oidcForceOnlyMode: boolean;
+  aiEnabled: boolean;
 }
 
 @Injectable({providedIn: 'root'})
@@ -86,7 +87,8 @@ export class AppSettingsService {
       oidcEnabled: appSettings.oidcEnabled,
       remoteAuthEnabled: appSettings.remoteAuthEnabled,
       oidcProviderDetails: appSettings.oidcProviderDetails,
-      oidcForceOnlyMode: appSettings.oidcForceOnlyMode
+      oidcForceOnlyMode: appSettings.oidcForceOnlyMode,
+      aiEnabled: appSettings.aiSettings?.enabled ?? false
     };
     const current = this.publicAppSettingsSubject.value;
 
@@ -95,6 +97,7 @@ export class AppSettingsService {
       current.oidcEnabled !== updatedPublicSettings.oidcEnabled ||
       current.remoteAuthEnabled !== updatedPublicSettings.remoteAuthEnabled ||
       current.oidcForceOnlyMode !== updatedPublicSettings.oidcForceOnlyMode ||
+      current.aiEnabled !== updatedPublicSettings.aiEnabled ||
       JSON.stringify(current.oidcProviderDetails) !== JSON.stringify(updatedPublicSettings.oidcProviderDetails)
     ) {
       this.publicAppSettingsSubject.next(updatedPublicSettings);

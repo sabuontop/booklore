@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import org.booklore.model.dto.settings.AISettings;
 
 @Data
 @Builder
@@ -40,4 +41,5 @@ public class AppSettings {
     private String oidcGroupSyncMode;
     private boolean oidcForceOnlyMode;
     private String diskType;
+    private AISettings aiSettings;
 }

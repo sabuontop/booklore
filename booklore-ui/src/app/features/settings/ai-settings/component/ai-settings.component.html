@@ -1,0 +1,60 @@
+<div class="ai-settings-container" *ngIf="aiSettings">
+  <div class="settings-header">
+    <h3><i class="pi pi-sparkles mr-2"></i>Assistant IA</h3>
+    <p class="text-sm text-surface-400">Configurez votre assistant intelligent pour explorer votre bibliothèque.</p>
+  </div>
+
+  <div class="settings-card mt-4">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h4 class="m-0">Activer l'Assistant IA</h4>
+        <p class="text-xs text-surface-400">Affiche une bulle de chat pour interagir avec vos livres.</p>
+      </div>
+      <p-toggleSwitch [(ngModel)]="aiSettings.enabled" (onChange)="save()"></p-toggleSwitch>
+    </div>
+
+    <div class="ai-config-fields" [class.disabled]="!aiSettings.enabled">
+      <div class="field mb-4">
+        <label for="apiKey">Clé API Groq / OpenAI</label>
+        <input 
+          id="apiKey" 
+          type="password" 
+          pInputText 
+          [(ngModel)]="aiSettings.apiKey" 
+          (blur)="save()"
+          placeholder="gsk_..."
+          class="w-full"
+        />
+        <small class="text-surface-400 mt-1 block">
+          L'assistant est optimisé pour Groq (rapide et gratuit). Obtenez une clé sur <a href="https://console.groq.com/keys" target="_blank" class="text-primary">console.groq.com</a>.
+        </small>
+      </div>
+
+      <div class="field mb-4">
+        <label for="model">Modèle d'IA</label>
+        <input 
+          id="model" 
+          type="text" 
+          pInputText 
+          [(ngModel)]="aiSettings.model" 
+          (blur)="save()"
+          placeholder="llama-3.3-70b-versatile"
+          class="w-full"
+        />
+      </div>
+
+      <div class="field">
+        <label for="baseUrl">URL de base de l'API</label>
+        <input 
+          id="baseUrl" 
+          type="text" 
+          pInputText 
+          [(ngModel)]="aiSettings.baseUrl" 
+          (blur)="save()"
+          placeholder="https://api.groq.com/openai/v1/chat/completions"
+          class="w-full"
+        />
+      </div>
+    </div>
+  </div>
+</div>

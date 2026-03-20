@@ -3,7 +3,8 @@ package org.booklore.service;
 import tools.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.booklore.config.AIProperties;
+import org.booklore.model.dto.settings.AISettings;
+import org.booklore.service.appsettings.AppSettingService;
 import org.booklore.model.entity.BookMetadataEntity;
 import org.booklore.repository.BookMetadataRepository;
 import org.springframework.stereotype.Service;
@@ -23,12 +24,13 @@ import java.util.stream.Collectors;
 public class AIService {
 
     private final HttpClient httpClient;
-    private final AIProperties aiProperties;
+    private final AppSettingService appSettingService;
     private final BookMetadataRepository bookMetadataRepository;
     private final ObjectMapper objectMapper;
 
     public String chat(String userMessage) throws Exception {
-        if (!aiProperties.isEnabled()) {
+        AISettings aiSettings = appSettingService.getAppSettings().getAiSettings();
+        if (aiSettings == null || !aiSettings.isEnabled()) {
             return "L'assistant IA est actuellement désactivé.";
         }
 
@@ -48,7 +50,7 @@ public class AIService {
                 "Voici la liste des livres de l'utilisateur :\n" + bookContext;
 
         Map<String, Object> requestBody = new HashMap<>();
-        requestBody.put("model", aiProperties.getModel());
+        requestBody.put("model", aiSettings.getModel());
         requestBody.put("messages", List.of(
                 Map.of("role", "system", "content", systemMessage),
                 Map.of("role", "user", "content", userMessage)
@@ -57,9 +59,9 @@ public class AIService {
         String jsonBody = objectMapper.writeValueAsString(requestBody);
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(aiProperties.getBaseUrl()))
+                .uri(URI.create(aiSettings.getBaseUrl()))
                 .header("Content-Type", "application/json")
-                .header("Authorization", "Bearer " + aiProperties.getApiKey())
+                .header("Authorization", "Bearer " + aiSettings.getApiKey())
                 .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                 .build();
 

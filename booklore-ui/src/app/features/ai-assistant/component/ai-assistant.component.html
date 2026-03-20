@@ -1,40 +1,42 @@
-<div class="ai-container" [class.opened]="isOpen">
-  <button class="ai-toggle-btn" (click)="toggle()">
-    <i class="pi pi-sparkles"></i>
-  </button>
+<ng-container *ngIf="isAvailable$ | async">
+  <div class="ai-container" [class.opened]="isOpen">
+    <button class="ai-toggle-btn" (click)="toggle()">
+      <i class="pi pi-sparkles"></i>
+    </button>
 
-  <div class="ai-chat-window" *ngIf="isOpen">
-    <div class="ai-header">
-      <i class="pi pi-sparkles mr-2"></i>
-      <span>Assistant Booklore</span>
-      <button class="ai-close-btn" (click)="isOpen = false">
-        <i class="pi pi-times"></i>
-      </button>
-    </div>
+    <div class="ai-chat-window" *ngIf="isOpen">
+      <div class="ai-header">
+        <i class="pi pi-sparkles mr-2"></i>
+        <span>Assistant Booklore</span>
+        <button class="ai-close-btn" (click)="isOpen = false">
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
 
-    <div class="ai-messages" #scrollContainer>
-      <div *ngFor="let msg of messages" class="message" [class.user]="msg.role === 'user'" [class.assistant]="msg.role === 'assistant'">
-        <div class="message-content">
-          {{ msg.content }}
+      <div class="ai-messages" #scrollContainer>
+        <div *ngFor="let msg of messages" class="message" [class.user]="msg.role === 'user'" [class.assistant]="msg.role === 'assistant'">
+          <div class="message-content">
+            {{ msg.content }}
+          </div>
+        </div>
+        <div *ngIf="isTyping" class="message assistant typing">
+          <div class="message-content">
+            <i class="pi pi-spin pi-spinner"></i> Réflexion...
+          </div>
         </div>
       </div>
-      <div *ngIf="isTyping" class="message assistant typing">
-        <div class="message-content">
-          <i class="pi pi-spin pi-spinner"></i> Réflexion...
-        </div>
-      </div>
-    </div>
 
-    <div class="ai-footer">
-      <input 
-        type="text" 
-        pInputText 
-        [(ngModel)]="userInput" 
-        (keyup.enter)="sendMessage()" 
-        placeholder="Posez une question à votre bibliothèque..."
-        [disabled]="isTyping"
-      />
-      <button pButton icon="pi pi-send" (click)="sendMessage()" [disabled]="!userInput || isTyping"></button>
+      <div class="ai-footer">
+        <input 
+          type="text" 
+          pInputText 
+          [(ngModel)]="userInput" 
+          (keyup.enter)="sendMessage()" 
+          placeholder="Posez une question à votre bibliothèque..."
+          [disabled]="isTyping"
+        />
+        <button pButton icon="pi pi-send" (click)="sendMessage()" [disabled]="!userInput || isTyping"></button>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>

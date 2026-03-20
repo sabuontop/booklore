@@ -159,6 +159,13 @@ export interface CoverCroppingSettings {
   smartCroppingEnabled: boolean;
 }
 
+export interface AISettings {
+  enabled: boolean;
+  apiKey: string;
+  baseUrl: string;
+  model: string;
+}
+
 export interface OidcTestCheck {
   name: string;
   status: 'PASS' | 'FAIL' | 'WARN' | 'SKIP';
@@ -197,6 +204,7 @@ export interface AppSettings {
   oidcGroupSyncMode: string | null;
   oidcForceOnlyMode: boolean;
   diskType: string;
+  aiSettings: AISettings;
 }
 
 export interface MetadataProviderSpecificFields {
@@ -246,4 +254,5 @@ export enum AppSettingKey {
   OIDC_SESSION_DURATION_HOURS = 'OIDC_SESSION_DURATION_HOURS',
   OIDC_GROUP_SYNC_MODE = 'OIDC_GROUP_SYNC_MODE',
   OIDC_FORCE_ONLY_MODE = 'OIDC_FORCE_ONLY_MODE',
+  AI_SETTINGS = 'AI_SETTINGS',
 }

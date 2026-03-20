@@ -1,0 +1,40 @@
+.ai-settings-container {
+  padding: 1.5rem;
+}
+
+.settings-card {
+  background: var(--p-surface-800);
+  border: 1px solid var(--p-surface-700);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.ai-config-fields {
+  transition: opacity 0.3s ease;
+  
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    filter: grayscale(0.5);
+  }
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: var(--p-surface-200);
+}
+
+input {
+  background: var(--p-surface-900);
+  border-color: var(--p-surface-700);
+  color: white;
+  &:focus { border-color: var(--p-primary-500); }
+}
+
+.text-primary {
+  color: var(--p-primary-500);
+  text-decoration: none;
+  &:hover { text-decoration: underline; }
+}
