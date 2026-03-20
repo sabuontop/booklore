@@ -14,8 +14,8 @@
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, #818cf8, #c084fc);
-  color: white;
+  background: linear-gradient(135deg, var(--p-primary-500), var(--p-primary-400));
+  color: var(--p-primary-contrast-color);
   border: none;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -61,7 +61,7 @@
   display: flex;
   align-items: center;
   font-weight: 600;
-  color: #c084fc;
+  color: var(--p-primary-400);
 
   .ai-close-btn {
     margin-left: auto;
@@ -95,8 +95,8 @@
     &.user {
       align-self: flex-end;
       .message-content {
-        background: #818cf8;
-        color: white;
+        background: var(--p-primary-500);
+        color: var(--p-primary-contrast-color);
         border-bottom-right-radius: 0.25rem;
       }
     }
@@ -129,6 +129,6 @@
     background: var(--p-surface-800);
     border-color: var(--p-surface-700);
     color: white;
-    &:focus { border-color: #818cf8; }
+    &:focus { border-color: var(--p-primary-500); }
   }
 }
