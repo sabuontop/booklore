@@ -28,7 +28,6 @@ import {Menu} from 'primeng/menu';
 import {TranslocoDirective, TranslocoService} from '@jsverse/transloco';
 import {AVAILABLE_LANGS, LANG_LABELS} from '../../../../core/config/transloco-loader';
 import {LANG_STORAGE_KEY} from '../../../../core/config/language-initializer';
-import {SUPPORT_ANIMATION_KEY} from '../../../../features/settings/global-preferences/global-preferences.component';
 
 @Component({
   selector: 'app-topbar',
@@ -69,9 +68,7 @@ export class AppTopBarComponent implements OnDestroy {
   completedTaskCount = 0;
   hasActiveOrCompletedTasks = false;
   showPulse = false;
-  hasAnyTasks = false;
   hasPendingBookdropFiles = false;
-  supportAnimationEnabled = localStorage.getItem(SUPPORT_ANIMATION_KEY) !== 'false';
 
   private eventTimer: number | undefined;
   private destroy$ = new Subject<void>();
@@ -103,8 +100,6 @@ export class AppTopBarComponent implements OnDestroy {
       icon: lang === this.activeLang ? 'pi pi-check' : undefined,
       command: () => this.switchLanguage(lang),
     }));
-    this.onStorageChange = this.onStorageChange.bind(this);
-    window.addEventListener('storage', this.onStorageChange);
 
     this.subscribeToMetadataProgress();
     this.subscribeToNotifications();
@@ -137,24 +132,14 @@ export class AppTopBarComponent implements OnDestroy {
   ngOnDestroy(): void {
     if (this.ref) this.ref.close();
     clearTimeout(this.eventTimer);
-    window.removeEventListener('storage', this.onStorageChange);
     this.destroy$.next();
     this.destroy$.complete();
   }
 
-  private onStorageChange(event: StorageEvent): void {
-    if (event.key === SUPPORT_ANIMATION_KEY) {
-      this.supportAnimationEnabled = event.newValue !== 'false';
-    }
-  }
 
   toggleMenu() {
     this.isMenuVisible = !this.isMenuVisible;
     this.layoutService.onMenuToggle();
-  }
-
-  openGithubSupportDialog(): void {
-    this.dialogLauncher.openGithubSupportDialog();
   }
 
   openLibraryCreatorDialog(): void {

@@ -281,16 +281,6 @@
             </button>
             <p-menu #langMenuMobile [model]="langMenuItems" [popup]="true"/>
           </li>
-          <li>
-            <button
-              class="mobile-menu-item"
-              (click)="openGithubSupportDialog(); mobileMenu.hide()"
-            >
-              <i class="pi pi-thumbs-up topbar-icon"></i>
-              {{ t('supportBookLore') }}
-            </button>
-          </li>
-
           @if (userService.userState$ | async; as userState) {
             @if (!userState.user?.permissions?.demoUser) {
               <li>
