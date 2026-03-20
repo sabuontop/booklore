@@ -108,7 +108,6 @@ export class AppTopBarComponent implements OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((tasks) => {
         this.latestTasks = tasks;
-        this.hasAnyTasks = Object.keys(tasks).length > 0;
         this.updateCompletedTaskCount();
         this.updateTaskVisibility(tasks);
       });
