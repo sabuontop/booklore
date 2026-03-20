@@ -7,6 +7,7 @@ import {AppTopBarComponent} from '../layout-topbar/app.topbar.component';
 import {NgClass} from '@angular/common';
 import {ToastModule} from 'primeng/toast';
 import {LocalStorageService} from '../../../service/local-storage.service';
+import {AIAssistantComponent} from '../../../../features/ai-assistant/component/ai-assistant.component';
 
 @Component({
   selector: 'app-layout',
@@ -15,7 +16,8 @@ import {LocalStorageService} from '../../../service/local-storage.service';
     AppSidebarComponent,
     AppTopBarComponent,
     NgClass,
-    ToastModule
+    ToastModule,
+    AIAssistantComponent
   ],
   templateUrl: './app.layout.component.html'
 })
